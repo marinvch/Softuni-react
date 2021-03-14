@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Ranchers&display=swap");
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background-color: #f4f7f6;
+  padding: 10px;
+}
+.logo {
+  font-size: 40px;
+  font-weight: bold;
+  font-family: "Ranchers", cursive;
+}
+
+.logo:hover {
+  animation: blinker 1s linear infinite;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+header ul {
+  display: flex;
+  list-style: none;
+}
+nav ul li {
+  border-radius: 20px;
+  text-align: center;
+  width: 100px;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #42ab9e;
+  color: white;
+}
+nav ul li:hover {
+  cursor: pointer;
+  transform: rotateX(360deg);
+  transition: all 1s;
+  border-radius: 10px;
+  background-color: white;
+  color: #42ab9e;
+}

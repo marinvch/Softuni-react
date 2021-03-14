@@ -1,0 +1,28 @@
+.post-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #262c32;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 2px -2px gray;
+}
+.post-section {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.user {
+  width: 20%;
+}
+
+.content {
+  width: 60%;
+}
+.details {
+  width: 20%;
+}
