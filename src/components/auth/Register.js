@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "./Styles/Register.css";
 import axios from "axios";
+
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
     if (password.toString().length < 6) {
       return console.log("Passowrd need to be atleast 6 characters.");
@@ -20,10 +21,11 @@ const Register = () => {
       password: password,
       confirmPassword: confirmPassword,
     };
-    console.log(data);
-    axios.post("http://localhost:5000/auth/register", { data }).then((res) => {
-      console.log(res);
-    });
+    await axios
+      .post("http://localhost:5000/auth/register", data)
+      .then((res) => {
+        console.log(res);
+      });
   };
 
   return (
