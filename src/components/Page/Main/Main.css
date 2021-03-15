@@ -1,7 +1,11 @@
 .container-wrapper {
   display: flex;
-  width: 80%;
+  flex-direction: column;
+  width: 90%;
   flex-wrap: wrap;
   margin: 0 auto;
-  margin-top: 40px;
+}
+
+.post{
+  margin-top:10px;
 }

@@ -5,9 +5,7 @@ import "./Main.css";
 const Main = () => {
   return (
     <article className="container-wrapper">
-      <Post />
-      <Post />
-      <Post />  
+      <Post className="post" />
     </article>
   );
 };
