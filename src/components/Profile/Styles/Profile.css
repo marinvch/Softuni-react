@@ -1,0 +1,19 @@
+.profile {
+  display: flex;
+  padding-top: 20px;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.profile input {
+  width: 300px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.profile button {
+  width: 400px;
+  padding: 20px;
+}
