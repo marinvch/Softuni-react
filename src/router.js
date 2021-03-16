@@ -6,6 +6,7 @@ import Profile from "./components/Profile/Profile";
 import AuthContext from "./context/AuthContext";
 import Home from "./components/layout/Home";
 import CreatePost from "./components/Profile/CreatePost";
+import EditPost from "./components/Profile/EditPost";
 
 function Router() {
   const { logedIn } = useContext(AuthContext);
@@ -33,9 +34,11 @@ function Router() {
             <Route path="/createpost">
               <CreatePost />
             </Route>
+            <Route path="/editpost">
+              <EditPost />
+            </Route>
           </>
         )}
-        
       </Switch>
     </BrowserRouter>
   );
