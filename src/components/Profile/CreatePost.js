@@ -1,27 +1,28 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 import axios from "axios";
-import Navigation from "../layout/Navigation";
-import Footer from "../layout/Footer";
-import jwtDecode from "jwt-decode";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const { userData } = useContext(UserContext);
 
   const history = useHistory();
   async function createPost(e) {
+    const author = userData.user.id;
+    console.log(author);
     e.preventDefault();
     try {
-     console.log(window)
       const postData = {
         title,
         content,
         createdAt: new Date(),
+        author,
       };
 
-      await axios.post("", postData);
-      history.pushState("/");
+      await axios.post("http://localhost:5000/posts", postData);
+      history.push("/");
     } catch (err) {
       console.error(err);
     }
@@ -29,7 +30,6 @@ const CreatePost = () => {
 
   return (
     <div>
-      <Navigation />
       <form onSubmit={createPost}>
         <input
           type="text"
@@ -47,7 +47,6 @@ const CreatePost = () => {
         />
         <button type="submit">Save new post</button>
       </form>
-      <Footer />
     </div>
   );
 };

@@ -1,29 +1,37 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Navigation from "../layout/Navigation";
-import Footer from "../layout/Footer";
+import UserContext from "../../context/UserContext";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "./Styles/Login.css";
 import axios from "axios";
-import AuthContext from "../../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { getLogedIn } = useContext(AuthContext);
+  const { setUserData } = useContext(UserContext);
   const history = useHistory();
+
   async function loginUser(e) {
     e.preventDefault();
 
     try {
-      const loginData = {
+      const loginUser = {
         email,
         password,
       };
 
-      await axios.post("http://localhost:5000/auth/login", loginData);
-      await getLogedIn();
+      const loginRes = await axios.post(
+        "http://localhost:5000/auth/login",
+        loginUser
+      );
+
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+
+      localStorage.setItem("auth-token", loginRes.data.token);
       history.push("/");
     } catch (err) {
       console.error(err);
@@ -32,13 +40,12 @@ const Login = () => {
 
   return (
     <>
-      <Navigation />
-      <section className="register-wrapper">
+      <section className="login-wrapper">
         <h1>Log in to your Account</h1>
         <form onSubmit={loginUser}>
           <AccountCircleIcon />
           <input
-            className="register-input"
+            className="login-input"
             type="email"
             name="email"
             placeholder="Email"
@@ -48,7 +55,7 @@ const Login = () => {
             }}
           />
           <input
-            className="register-input"
+            className="login-input"
             type="password"
             name="password"
             placeholder="Password"
@@ -58,7 +65,7 @@ const Login = () => {
             }}
           />
 
-          <button className="register-buton" type="submit">
+          <button className="login-buton" type="submit">
             Login
           </button>
           <span>
@@ -66,7 +73,6 @@ const Login = () => {
           </span>
         </form>
       </section>
-      <Footer />
     </>
   );
 };
