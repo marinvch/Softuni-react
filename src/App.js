@@ -1,72 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Axios from "axios";
-import Home from "./components/layout/Home";
-import Register from "./components/Auth/Register";
-import Login from "./components/Auth/Login";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import UserContext from "./context/UserContext";
-import CreatePost from "./components/Profile/CreatePost";
-import EditPost from "./components/Profile/EditPost";
-import Profile from "./components/Profile/Profile";
-import DeletePost from "./components/Profile/DeletePost";
+import { getToken } from "./Components/Api/index";
+import UserContext from "./Context/UserContext";
 
-const App = () => {
+import Register from "./Components/Auth/Register";
+import Login from "./Components/Auth/Login";
+
+import Home from "./Components/Home";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+
+import CreatePost from "./Components/Post/CreatePost";
+import EditPost from "./Components/Post/EditPost";
+
+import Profile from "./Components/Profile/Profile";
+import DeletePost from "./Components/Post/DeletePost";
+
+function App() {
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
   });
 
   useEffect(() => {
-    const checkLogedIn = async () => {
-      let token = localStorage.getItem("auth-token");
-      if (token === null) {
-        localStorage.setItem("auth-token", "");
-        token = "";
-      }
-      const tokenRes = await Axios.post(
-        "http://localhost:5000/auth/validToken",
-        null,
-        {
-          headers: { "x-auth-token": token },
-        }
-      );
+    let token = localStorage.getItem("auth-token");
+    const tokenRes = getToken({
+      headers: {
+        "x-auth-token": token,
+      },
+    });
 
-      if (tokenRes.data) {
-        const userRes = await Axios.get("http://localhost:5000/auth/", {
-          headers: {
-            "x-auth-token": token,
-          },
-        });
-        setUserData({
-          token,
-          user: userRes.data,
-        });
-      }
-    };
-    checkLogedIn();
-  }, []);
+    if (token === null) {
+      localStorage.setItem("auth-token", "");
+      token = "";
+    }
+
+    if (tokenRes.data) {
+      setUserData(tokenRes.data);
+    }
+    getToken();
+    console.log(userData)
+  }, [userData]);
 
   return (
-    <>
-      <BrowserRouter>
-        <UserContext.Provider value={{ userData, setUserData }}>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/addpost" component={CreatePost} />
-            <Route path="/editpost" component={EditPost} />
-            <Route path="/deletepost" component={DeletePost} />
-          </Switch>
-          <Footer />
-        </UserContext.Provider>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <UserContext.Provider value={{ userData, setUserData }}>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/createpost" component={CreatePost} />
+          <Route path="/editpost" component={EditPost} />
+          <Route path="/deletepost" component={DeletePost} />
+        </Switch>
+        <Footer />
+      </UserContext.Provider>
+    </BrowserRouter>
   );
-};
+}
 
 export default App;

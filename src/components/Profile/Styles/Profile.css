@@ -16,4 +16,12 @@
 .profile button {
   width: 400px;
   padding: 20px;
+  background-color: #262c32;
+  color: white;
+}
+
+.profile button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: #262c32;
 }

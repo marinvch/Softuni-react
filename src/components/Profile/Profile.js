@@ -5,10 +5,10 @@ function Profile() {
   return (
     <>
       <section className="profile">
-        <h1> User Profile</h1>
-        <input type="password" placeholder="New password"></input>
-        <input type="password" placeholder="Confirm new password"></input>
-        <button type="submit"> Save</button>
+        <h1> Username</h1>
+        <section>Avatar</section>
+        <section>Number of posts</section>
+        <section>Number of comments</section>
       </section>
     </>
   );

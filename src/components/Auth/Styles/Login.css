@@ -1,13 +1,15 @@
 .login-wrapper {
   display: flex;
-  align-items: ce;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   justify-content: center;
 }
 .login-wrapper form {
   padding: 20px;
   margin-top: 20px;
   display: flex;
-  flex-basis: 60%;
+  width: 100%;
   justify-content: center;
   align-items: center;
   flex-direction: column;

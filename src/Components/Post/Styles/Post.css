@@ -1,0 +1,25 @@
+.view-post-wrapper {
+  border: none;
+  background: inherit;
+  color: white;
+}
+.view-post-wrapper:hover {
+  background-color: white;
+  color: #262c32;
+}
+
+.post-options {
+  display: flex;
+  justify-content: space-between;
+ 
+}
+
+.post-options button {
+  background-color: inherit;
+  border: none;
+  color: white;
+}
+.post-options button :hover {
+  background-color: white;
+  color: #262c32;
+}

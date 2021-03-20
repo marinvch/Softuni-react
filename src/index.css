@@ -1,5 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Forum&family=Lobster&display=swap");
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+body,
+a,
+link,
+Link {
+  font-family: "Forum", cursive;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lobster", cursive;
 }
