@@ -1,35 +1,39 @@
 import React, { useState } from "react";
+
 import { Link, useHistory } from "react-router-dom";
+import { url } from "../../Api/index";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import axios from "axios";
 import "./Styles/Register.css";
-import { registerUser } from "../Api/index";
 
 const Register = () => {
-  const [data, setData] = useState({
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
-
   const history = useHistory();
 
-  async function sendRegistration(e) {
-    e.preventDefault();
+  let [email, setEmail] = useState();
+  let [username, setUsername] = useState();
+  let [password, setPassword] = useState();
+  let [confirmPassword, setConfirmPassword] = useState();
 
+  const submit = async (e) => {
     try {
-      registerUser(data);
+      e.preventDefault();
+      if (!username) {
+        username = email;
+      }
+      let newUser = { email, username, password, confirmPassword };
 
-      history.push("/");
-    } catch (err) {
-      console.error(err);
+      axios.post(`${url}/auth/register`, newUser)
+
+      history.push("/login");
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   return (
     <section className="register-wrapper">
       <h1>Register your Account</h1>
-      <form onSubmit={sendRegistration}>
+      <form onSubmit={submit}>
         <AccountCircleIcon />
         <input
           className="register-input"
@@ -37,14 +41,14 @@ const Register = () => {
           name="email"
           placeholder="Email"
           required
-          onChange={(e) => setData({ ...data, email: e.target.value })}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="register-input"
           type="text"
           name="username"
           placeholder="Username"
-          onChange={(e) => setData({ ...data, username: e.target.value })}
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           className="register-input"
@@ -52,7 +56,7 @@ const Register = () => {
           name="password"
           placeholder="Password"
           required
-          onChange={(e) => setData({ ...data, password: e.target.value })}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <input
           className="register-input"
@@ -60,9 +64,7 @@ const Register = () => {
           name="confirm_password"
           placeholder="Confirm Password"
           required
-          onChange={(e) =>
-            setData({ ...data, confirmPassword: e.target.value })
-          }
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
         <button className="register-buton" type="submit">
           SignUp

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { getToken } from "./Components/Api/index";
+import { url } from "./Api/index";
 import UserContext from "./Context/UserContext";
 
 import Register from "./Components/Auth/Register";
@@ -12,35 +12,42 @@ import Footer from "./Components/Footer";
 
 import CreatePost from "./Components/Post/CreatePost";
 import EditPost from "./Components/Post/EditPost";
-
-import Profile from "./Components/Profile/Profile";
 import DeletePost from "./Components/Post/DeletePost";
 
-function App() {
+import Profile from "./Components/Profile/Profile";
+import axios from "axios";
+
+export default function App() {
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
   });
 
   useEffect(() => {
-    let token = localStorage.getItem("auth-token");
-    const tokenRes = getToken({
-      headers: {
-        "x-auth-token": token,
-      },
-    });
+    const checkLoggedIn = async () => {
+      let token = localStorage.getItem("auth-token");
+      if (token === null) {
+        localStorage.setItem("auth-token", "");
+        token = "";
+      }
+      //check if the token is valid
+      let tokenRes = await axios.post(`${url}/auth/validtoken`, null, {
+        headers: {
+          "x-auth-token": token,
+        },
+      });
 
-    if (token === null) {
-      localStorage.setItem("auth-token", "");
-      token = "";
-    }
-
-    if (tokenRes.data) {
-      setUserData(tokenRes.data);
-    }
-    getToken();
-    console.log(userData)
-  }, [userData]);
+      if (tokenRes.data) {
+        let userRes = await axios.get(`${url}/auth/currentuser`, {
+          headers: {
+            "x-auth-token": token,
+          },
+        });
+        setUserData({ token, user: userRes.data });
+      }
+    };
+    checkLoggedIn();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -60,5 +67,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

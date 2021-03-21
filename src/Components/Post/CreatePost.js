@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
+import UserContext from "../../Context/UserContext";
 import "./Styles/Createpost.css";
-import { createPost } from "../Api/index";
+import { createPost } from "../../Api/index";
 
 const CreatePost = () => {
+  const { userData } = useContext(UserContext);
   const history = useHistory();
+
   //Post data
   const [data, setData] = useState({
     title: "",
@@ -16,6 +18,9 @@ const CreatePost = () => {
 
   function addPost(e) {
     e.preventDefault();
+    console.log(userData);
+    data.date = new Date();
+    data.author = userData.user.id;
 
     try {
       //Validation

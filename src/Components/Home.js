@@ -1,15 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { getPosts } from "./Api/index";
+import React from "react";
 import "./Styles/Home.css";
 
 const Home = () => {
-  let [posts, setPosts] = useState([]);
-  useEffect(() => {
-    getPosts().then((res) => {
-      setPosts(res.data);
-    });
-  }, []);
-
   return <section>some info will be here</section>;
 };
 

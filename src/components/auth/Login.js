@@ -1,41 +1,45 @@
 import React, { useState, useContext } from "react";
-import { loginUser } from "../Api/index";
+import UserContext from "../../Context/UserContext";
+import { url } from "../../Api/index";
+import axios from "axios";
+
 import { Link, useHistory } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import UserContext from "../../Context/UserContext";
+
 import "./Styles/Login.css";
 
 const Login = () => {
-  const history = useHistory();
   const { userData, setUserData } = useContext(UserContext);
+  const history = useHistory();
 
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-  async function sendLogin(e) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const submit = async (e) => {
     e.preventDefault();
 
     try {
-      loginUser(loginData).then((res) => {
-        //Setting localStorage with token and user data
-        localStorage.setItem("jwt", res.data.token);
-        localStorage.setItem("user", JSON.stringify(res.data.findUser));
-        setUserData(res.data);
-        console.log(setUserData);
+      const loginData = { email, password };
+
+      await axios.post(`${url}/auth/login`, loginData).then((res) => {
+        setUserData({
+          token: res.data.token,
+          user: res.data.user,
+        });
+        localStorage.setItem("auth-token", res.data.token);
       });
 
       history.push("/");
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <>
       <section className="login-wrapper">
         <h1>Log in to your Account</h1>
-        <form onSubmit={sendLogin}>
+        <form onSubmit={submit}>
           <AccountCircleIcon />
           <input
             className="register-input"
@@ -43,9 +47,7 @@ const Login = () => {
             name="email"
             placeholder="Email"
             required
-            onChange={(e) =>
-              setLoginData({ ...loginData, email: e.target.value })
-            }
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             className="register-input"
@@ -53,9 +55,7 @@ const Login = () => {
             name="password"
             placeholder="Password"
             required
-            onChange={(e) =>
-              setLoginData({ ...loginData, password: e.target.value })
-            }
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <button className="login-buton" type="submit">
