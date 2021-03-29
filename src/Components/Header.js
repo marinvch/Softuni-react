@@ -1,24 +1,15 @@
 import React, { useContext } from "react";
 import UserContext from "../Context/UserContext";
+import { Link, useHistory } from "react-router-dom";
 import "./Styles/Header.css";
-import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const { userData, setUserData } = useContext(UserContext);
   const history = useHistory();
 
-  const home = () => history.push("/");
-  const register = () => history.push("/register");
-  const login = () => history.push("/login");
-  const profile = () => history.push("/profile");
-  const createPost = () => history.push("/createpost");
-
   const logout = () => {
-    setUserData({
-      token: undefined,
-      user: undefined,
-    });
-    history.push("/");
+    localStorage.clear();
+    window.location.href = "/";
   };
 
   return (
@@ -27,17 +18,31 @@ const Header = () => {
         <h1>MERN FORUM</h1>
       </section>
       {userData.user ? (
-        <section>
-          <button onClick={home}>Home</button>
-          <button onClick={createPost}>Add Post</button>
-          <button onClick={profile}>Profile</button>
-          <button onClick={logout}>Logout</button>
+        <section className="navigation">
+          <Link className="nav-item" to="/">
+            Home
+          </Link>
+          <Link className="nav-item" to="/create-post">
+            Add Post
+          </Link>
+          <Link className="nav-item" to="/profile">
+            Profile
+          </Link>
+          <Link className="nav-item" to="/" onClick={() => logout()}>
+            Logout
+          </Link>
         </section>
       ) : (
-        <section>
-          <button onClick={home}>Home</button>
-          <button onClick={register}>Register</button>
-          <button onClick={login}>Login</button>
+        <section className="navigation">
+          <Link className="nav-item" to="/">
+            Home
+          </Link>
+          <Link className="nav-item" to="/register">
+            Register
+          </Link>
+          <Link className="nav-item" to="/login">
+            Login
+          </Link>
         </section>
       )}
     </header>

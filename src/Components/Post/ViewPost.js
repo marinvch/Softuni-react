@@ -1,25 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { url } from "../../Api/index";
 import axios from "axios";
+import UserContext from "../../Context/UserContext";
 
-function ViewPost({ post }) {
-  const [data, setData] = useState();
-  const { _id } = useParams();
-  const load = async () => {};
+const EditPost = (props) => {
+  const { userData } = useContext(UserContext);
+  const [post, setPost] = useState({});
+
+  const id = props.match.params.id;
 
   useEffect(() => {
-    axios.get(`http://localhost:posts/:${_id}`).then((res) => {
-      console.log(res.data);
+    axios.get(`${url}/posts/${id}`).then((res) => {
+      setPost(res.data);
     });
-  }, [_id]);
-  return (
-    <div>
-      <form onLoad={load}>
-        <h1>Post Title{post.title}</h1>
-        <section>Comments</section>
-      </form>
-    </div>
-  );
-}
+  }, [id, props]);
 
-export default ViewPost;
+  return (
+    <>
+      {!post.title || !post.content ? (
+        <CircularProgress />
+      ) : (
+        <section className="post-wrapper">
+          <p>{post.title}</p>
+          <p>{post.content}</p>
+          {userData.user ? <button>Add Comment</button> : <></>}
+        </section>
+      )}
+    </>
+  );
+};
+
+export default EditPost;

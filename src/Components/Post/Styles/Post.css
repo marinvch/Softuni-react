@@ -1,25 +1,29 @@
-.view-post-wrapper {
-  border: none;
-  background: inherit;
+.post-wrapper {
+  width: 90%;
+  padding: 5px 10px;
+}
+li {
+  background-color: #262c32;
   color: white;
-}
-.view-post-wrapper:hover {
-  background-color: white;
-  color: #262c32;
-}
-
-.post-options {
   display: flex;
+  width: 100%;
   justify-content: space-between;
- 
+  list-style-type: none;
+  margin: 20px;
 }
-
-.post-options button {
-  background-color: inherit;
-  border: none;
+.link-content {
+  text-decoration: none;
   color: white;
 }
-.post-options button :hover {
-  background-color: white;
-  color: #262c32;
+
+.link-content:hover {
+  cursor: pointer;
+
+  color: #93999e;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

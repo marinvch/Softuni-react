@@ -9,7 +9,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import "./Styles/Login.css";
 
 const Login = () => {
-  const { userData, setUserData } = useContext(UserContext);
+  const { setUserData } = useContext(UserContext);
   const history = useHistory();
 
   const [email, setEmail] = useState();
@@ -62,7 +62,7 @@ const Login = () => {
             Login
           </button>
           <span>
-            Don't have an account?<Link to="/register">Register</Link>
+            <p>Don't have an account?</p> <Link to="/register">Register</Link>
           </span>
         </form>
       </section>

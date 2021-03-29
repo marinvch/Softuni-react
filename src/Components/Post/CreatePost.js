@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import "./Styles/Createpost.css";
-import { createPost } from "../../Api/index";
+import { url } from "../../Api/index";
+import axios from "axios";
 
 const CreatePost = () => {
   const { userData } = useContext(UserContext);
@@ -16,11 +17,8 @@ const CreatePost = () => {
     author: "",
   });
 
-  function addPost(e) {
+  const addPost = async (e) => {
     e.preventDefault();
-    console.log(userData);
-    data.date = new Date();
-    data.author = userData.user.id;
 
     try {
       //Validation
@@ -28,16 +26,25 @@ const CreatePost = () => {
         return alert("Fill all Fields.");
       }
 
+      //Check is LoggedIn
+      if (userData.token) {
+        data.date = new Date();
+        data.author = userData.user.id;
+      }
+
       //Sending Post Request to the backend
+      await axios.post(`${url}/posts/createpost`, data, {
+        headers: {
+          "x-auth-token": userData.token,
+        },
+      });
 
-      createPost(data);
-
-      //Relocatin to the home Page
+      //Relocating to home Page
       history.push("/");
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   return (
     <section className="post-wrapper">

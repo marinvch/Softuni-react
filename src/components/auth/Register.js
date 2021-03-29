@@ -22,7 +22,7 @@ const Register = () => {
       }
       let newUser = { email, username, password, confirmPassword };
 
-      axios.post(`${url}/auth/register`, newUser)
+      axios.post(`${url}/auth/register`, newUser);
 
       history.push("/login");
     } catch (error) {
@@ -70,7 +70,7 @@ const Register = () => {
           SignUp
         </button>
         <span>
-          Already have an account<Link to="/login">Login</Link>
+          <p>Already have an account</p> <Link to="/login">Login</Link>
         </span>
       </form>
     </section>
