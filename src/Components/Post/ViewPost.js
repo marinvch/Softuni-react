@@ -8,13 +8,16 @@ const EditPost = (props) => {
   const { userData } = useContext(UserContext);
   const [post, setPost] = useState({});
 
-  const id = props.match.params.id;
-
   useEffect(() => {
-    axios.get(`${url}/posts/${id}`).then((res) => {
-      setPost(res.data);
-    });
-  }, [id, props]);
+    console.log(props);
+    let id = props.match.params.id;
+    const getPost = async () => {
+      await axios.get(`${url}/posts/${id}`).then((res) => {
+        setPost(res.data);
+      });
+    };
+    getPost()
+  }, [props]);
 
   return (
     <>

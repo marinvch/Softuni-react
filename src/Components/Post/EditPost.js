@@ -6,12 +6,12 @@ import { url } from "../../Api/index";
 import axios from "axios";
 
 const EditPost = (props) => {
-  const history = useHistory();
   const { userData } = useContext(UserContext);
+  const history = useHistory();
   const [message, setMessage] = useState({});
- 
 
-  const updatePost = (e) => {
+  let id = props.match.params.id;
+  const updatePost = async (e) => {
     e.preventDefault();
 
     const data = {
@@ -19,20 +19,23 @@ const EditPost = (props) => {
       content: message.content,
     };
 
-    axios
-      .put(`${url}/posts/${props.match.params.id}`, data, {
-        headers: {
-          "x-auth-token": userData.token,
-        },
-      })
-      .then(history.push("/"));
+    await axios.put(`${url}/posts/${id}`, data, {
+      headers: {
+        "x-auth-token": userData.token,
+      },
+    });
+    history.push("/");
   };
 
   useEffect(() => {
-    axios.get(`${url}/posts/${props.match.params.id}`).then((res) => {
-      setMessage(res.data);
-    });
-  }, [props.match.params.id]);
+    const loadPost = async () => {
+      const post = await axios.get(`${url}/posts/${id}`).then((res) => {
+        setMessage(res.data);
+      });
+      console.log(post);
+    };
+    loadPost();
+  }, [id]);
 
   return (
     <section className="post-wrapper">
@@ -40,7 +43,7 @@ const EditPost = (props) => {
       {!message.title || !message.content ? (
         <CircularProgress />
       ) : (
-        <form>
+        <form onSubmit={updatePost}>
           <input
             className="post-input"
             value={message.title}
@@ -55,7 +58,7 @@ const EditPost = (props) => {
             }
             type="text"
           />
-          <button onClick={updatePost}>Save new post</button>
+          <button type="submit">Save new post</button>
         </form>
       )}
     </section>

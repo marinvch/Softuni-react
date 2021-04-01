@@ -22,7 +22,7 @@ const Header = () => {
           <Link className="nav-item" to="/">
             Home
           </Link>
-          <Link className="nav-item" to="/create-post">
+          <Link className="nav-item" to="/add-post">
             Add Post
           </Link>
           <Link className="nav-item" to="/profile">
