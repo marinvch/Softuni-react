@@ -73,6 +73,7 @@ This app have all CRUD operations
 
 1.Like & dislike functionality
 2.Add and remove comments
+3.Need to handle some validations 
 
 ### `Developer help`
 
