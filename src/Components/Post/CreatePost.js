@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import "./Styles/Createpost.css";
 import { url } from "../../Api/index";
 import axios from "axios";
@@ -48,22 +49,28 @@ const CreatePost = () => {
 
   return (
     <section className="post-wrapper">
-      <h1>Add New Post</h1>
-      <form onSubmit={addPost}>
-        <input
-          className="post-input"
-          type="text"
-          placeholder="Title"
-          onChange={(e) => setData({ ...data, title: e.target.value })}
-        />
-        <input
-          className="post-input"
-          type="text"
-          placeholder="Content"
-          onChange={(e) => setData({ ...data, content: e.target.value })}
-        />
-        <button type="submit">Save new post</button>
-      </form>
+      {!userData.user ? (
+        <CircularProgress />
+      ) : (
+        <>
+          <h1>Add New Post</h1>
+          <form onSubmit={addPost}>
+            <input
+              className="post-input"
+              type="text"
+              placeholder="Title"
+              onChange={(e) => setData({ ...data, title: e.target.value })}
+            />
+            <input
+              className="post-input"
+              type="text"
+              placeholder="Content"
+              onChange={(e) => setData({ ...data, content: e.target.value })}
+            />
+            <button type="submit">Save new post</button>
+          </form>
+        </>
+      )}
     </section>
   );
 };

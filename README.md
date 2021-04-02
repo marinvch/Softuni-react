@@ -45,26 +45,35 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### `Application Description`
+
+This app is basic forum type.
+Used tech stack is: [Express,Mongoose,React,React-Material-UI]
+
+for Demo => http://forum.marinvch.eu
+
+### `Application `
+
+1.This app have login and register pages
+2.This app have public and private part
+
+### `Application functionality`
+
+This app have all CRUD operations
+1.Create
+2.Edit
+3.Read
+4.Delete
+
+### `Application functionality under developing`
+
+1.Like & dislike functionality
+2.Add and remove comments
+
+### `Developer help`
+
+If needed for more info you can contact me email:marinvch@gmail.com

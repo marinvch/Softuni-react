@@ -1,3 +1,59 @@
 .post-wrapper {
-  height: calc(100vh - 60px);
+  display: flex;
+}
+li {
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  flex-wrap: wrap;
+  background-color: #565656;
+  color: white;
+}
+
+.content {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.link-item {
+  text-decoration: none;
+  color: white;
+}
+.link-item:hover {
+  color: rgb(190, 170, 170);
+}
+
+.likes {
+  background-color: inherit;
+}
+.details {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.user {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.info p {
+  margin-right: 8px;
+}
+.info {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.like-btn:hover {
+  color: green;
+  cursor: pointer;
 }

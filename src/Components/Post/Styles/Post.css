@@ -1,29 +1,74 @@
 .post-wrapper {
-  width: 90%;
-  padding: 5px 10px;
+  display: flex;
 }
 li {
-  background-color: #262c32;
-  color: white;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 10px;
   display: flex;
-  width: 100%;
   justify-content: space-between;
-  list-style-type: none;
-  margin: 20px;
+  width: 90%;
+  flex-wrap: wrap;
+  background-color: #565656;
+  color: white;
 }
-.link-content {
+
+.content {
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.link-item {
   text-decoration: none;
   color: white;
 }
-
-.link-content:hover {
-  cursor: pointer;
-
-  color: #93999e;
+.link-item:hover {
+  color: rgb(190, 170, 170);
 }
 
-.spinner {
+
+.details {
+  padding-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+}
+
+.user {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.info p {
+  margin-right: 8px;
+}
+.info {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.like-wrapper{
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.like-btn:hover {
+  color: green;
+  cursor: pointer;
+}
+
+.dislike-btn:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.date{
+  width: 80px;
 }

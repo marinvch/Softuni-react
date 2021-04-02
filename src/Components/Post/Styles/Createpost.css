@@ -1,9 +1,10 @@
 .post-wrapper {
   display: flex;
-  padding-top: 20px;
+  justify-content: center;
   align-items: center;
   width: 80%;
   margin: 0 auto;
+  min-height: 80vh;
   flex-direction: column;
 }
 
