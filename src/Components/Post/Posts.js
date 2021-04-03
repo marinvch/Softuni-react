@@ -153,7 +153,7 @@ function Post(props) {
                           <p>Author: {post.author.username} </p>
                         </section>
                         <section className="info">
-                          <p className="likes">Liked 0 times</p>
+                          <p className="likes">Liked {post.likes} times</p>
                           <p>
                             Created: {moment(`${post.createdAt}`).fromNow()}
                           </p>
