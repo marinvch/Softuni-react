@@ -52,28 +52,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### `Application Description`
 
 This app is basic forum type.
+
 Used tech stack is: [Express,Mongoose,React,React-Material-UI]
 
 for Demo => http://forum.marinvch.eu
 
 ### `Application `
 
-1.This app have login and register pages
-2.This app have public and private part
+Application builded with MERN stack tools
 
 ### `Application functionality`
 
-This app have all CRUD operations
-1.Create
-2.Edit
-3.Read
-4.Delete
+1.This app contains CRUD operation
+2.This app contains like and dislike functionality
+3.This app contains login & register funcitionality
 
 ### `Application functionality under developing`
 
-1.Like & dislike functionality
 2.Add and remove comments
-3.Need to handle some validations 
+3.Need to handle some validations
 
 ### `Developer help`
 
