@@ -69,8 +69,8 @@ Application builded with MERN stack tools
 
 ### `Application functionality under developing`
 
-2.Add and remove comments
-3.Need to handle some validations
+1.Add and remove comments
+2.Need to handle some validations
 
 ### `Developer help`
 
