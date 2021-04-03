@@ -40,7 +40,7 @@ const EditPost = (props) => {
   return (
     <section className="post-wrapper">
       <h1>Edit Post</h1>
-      {!message.title || !message.content ? (
+      {!message.title && !message.content ? (
         <CircularProgress />
       ) : (
         <form onSubmit={updatePost}>

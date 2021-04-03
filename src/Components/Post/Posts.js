@@ -18,7 +18,7 @@ function Post(props) {
   const { userData } = useContext(UserContext);
   const history = useHistory();
   let [posts, setPosts] = useState([]);
-  let [likes, setLikes] = useState(0);
+  let [likes, setLikes] = useState();
 
   const deletePost = async (id) => {
     await axios
@@ -34,32 +34,40 @@ function Post(props) {
   };
 
   const LikePost = async (id) => {
-    let post = await axios
-      .put(`${url}/posts/like`, null, {
+    await axios
+      .put(`${url}/posts/like/${id}`, likes, {
         headers: {
           "x-auth-token": userData.token,
         },
       })
-      .then((res) => console.log(res.data));
-    console.log(post.data);
+      .then((res) => {
+        console.log(res.data);
+        setLikes(res.data);
+        history.push("/");
+      });
   };
 
   const disLikePost = async (id) => {
-    let post = await axios
-      .put(`${url}/posts/like/`)
-      .then((res) => console.log(res.data));
-    console.log(post.data);
+    await axios
+      .put(`${url}/posts/dislike/${id}`, likes, {
+        headers: {
+          "x-auth-token": userData.token,
+        },
+      })
+      .then((res) => {
+        setLikes(res.data);
+        history.push("/");
+      });
   };
 
   useEffect(() => {
     const getData = async () => {
       await axios.get(`${url}/posts/`).then((res) => {
         setPosts(res.data);
-        console.log(res.data);
       });
     };
     getData();
-  }, []);
+  }, [likes]);
 
   return (
     <section className="post-wrapper">

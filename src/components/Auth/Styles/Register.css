@@ -7,13 +7,12 @@
 }
 .register-wrapper form {
   padding: 20px;
-  margin-top: 20px;
+  margin: 10px;
   display: flex;
-  width: 100%;
+  width: 60%;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   border: 1px solid #7b8581;
   border-radius: 10px;
 }
@@ -31,12 +30,11 @@
   transition: 0.2s ease-out;
 }
 
-.register-buton {
+.register-btn {
   background-color: #262c32;
   color: white;
   border-radius: 10px;
-  padding: 20px;
-  width: 100%;
+  width: 40%;
   margin-top: 10px;
   box-shadow: 0 4px 2px -2px gray;
 }
@@ -44,4 +42,7 @@
   cursor: pointer;
   color: #262c32;
   background-color: white;
+}
+span {
+  margin-top: 12px;
 }

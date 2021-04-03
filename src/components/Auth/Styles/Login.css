@@ -1,39 +1,36 @@
 .login-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
+  align-items: center;
   justify-content: center;
 }
 .login-wrapper form {
   padding: 20px;
-  margin-top: 20px;
+  margin: 20px;
   display: flex;
-  width: 100%;
+  width: 80%;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
   border: 1px solid #7b8581;
   border-radius: 10px;
 }
 
 .login-input {
-  margin: 20px;
-  padding: 20px;
   border-radius: 10px;
-  width: 30%;
+  width: 40%;
   box-shadow: 0 4px 2px -2px black;
 }
 
-.register-input:focus::-webkit-input-placeholder {
+.login-input:focus::-webkit-input-placeholder {
   font-size: 0.75em;
   position: relative;
   top: -20px;
   transition: 0.2s ease-out;
 }
 
-.login-button {
+.login-btn {
   background-color: #262c32;
   color: white;
   border-radius: 10px;

@@ -66,7 +66,7 @@ const Register = () => {
           required
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <button className="register-buton" type="submit">
+        <button className="register-btn" type="submit">
           SignUp
         </button>
         <span>
