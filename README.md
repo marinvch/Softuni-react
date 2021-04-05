@@ -1,7 +1,3 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
@@ -53,6 +49,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 This app is basic forum type.
 
+
 Used tech stack is: [Express,Mongoose,React,React-Material-UI]
 
 for Demo => http://forum.marinvch.eu
@@ -66,11 +63,14 @@ Application builded with MERN stack tools
 1.This app contains CRUD operation
 2.This app contains like and dislike functionality
 3.This app contains login & register funcitionality
+4.Create Edit or Delete Post 
+5.Can add Comments to a specific Post
 
 ### `Application functionality under developing`
 
-1.Add and remove comments
-2.Need to handle some validations
+
+1.Need to handle some validations
+2.Need to add some other functionality to comments and User Profile for now only displays the number of posts he have created
 
 ### `Developer help`
 

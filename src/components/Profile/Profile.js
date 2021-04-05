@@ -9,7 +9,6 @@ import axios from "axios";
 function Profile() {
   const { userData } = useContext(UserContext);
   const [posts, setPosts] = useState(0);
-
   useEffect(() => {
     axios
       .get(`${url}/auth/currentuser`, {
@@ -27,9 +26,8 @@ function Profile() {
         <CircularProgress />
       ) : (
         <section className="profile">
-          <h1 className="username"> {userData.user.username}</h1>
+          <h1 className="username"> Username: {userData.user.username}</h1>
           <section>Number of posts: {posts}</section>
-          <section>Number of comments : {0}</section>
         </section>
       )}
     </>

@@ -5,20 +5,26 @@ import axios from "axios";
 import "./Styles/Viewpost.css";
 import UserContext from "../../Context/UserContext";
 import CreateComment from "../Comment/CreateComment";
+import moment from "moment";
 
-const EditPost = (props) => {
+const ViewPost = (props) => {
   const { userData } = useContext(UserContext);
   const [post, setPost] = useState({});
+  //const [comments, setComments] = useState([]);
 
   useEffect(() => {
     let id = props.match.params.id;
+
     const getPost = async () => {
-      await axios.get(`${url}/posts/${id}`).then((res) => {
-        setPost(res.data);
-      });
+      await axios.all([
+        await axios.get(`${url}/posts/${id}`).then((res) => {
+          setPost(res.data);
+        }),
+      ]);
     };
+
     getPost();
-  }, [props]);
+  }, [props.match.params.id]);
 
   return (
     <>
@@ -26,13 +32,33 @@ const EditPost = (props) => {
         <CircularProgress />
       ) : (
         <section className="post-wrapper">
-          <p>{post.title}</p>
-          <p>{post.content}</p>
-          {userData.user ? <CreateComment /> : <></>}
+          <section className="current-post">
+            <p className="current-post-title">{post.title}</p>
+            <p>{post.content}</p>
+          </section>
+
+          <section className="comments-wrapper">
+            {post.comments
+              .map((c) => {
+                return (
+                  <li className="item-wrapper" key={c._id}>
+                    <section className="comment-content">
+                      <p>{c.content}</p>
+                    </section>
+                    <section className="comment-details">
+                      <p>createdBy:{c.author} </p>
+                      <p>createdAt: {moment(`${c.createdAt}`).fromNow()} </p>
+                    </section>
+                  </li>
+                );
+              })
+              .reverse()}
+          </section>
+          {userData.user ? <CreateComment props={props} /> : <></>}
         </section>
       )}
     </>
   );
 };
 
-export default EditPost;
+export default ViewPost;

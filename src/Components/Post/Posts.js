@@ -136,7 +136,7 @@ function Post(props) {
           ) : (
             <>
               {posts
-                .map((post, index) => {
+                .map((post) => {
                   return (
                     <li key={post._id}>
                       <section className="content">

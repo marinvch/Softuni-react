@@ -15,8 +15,9 @@ import CreatePost from "./Components/Post/CreatePost";
 import ViewPost from "./Components/Post/ViewPost";
 import EditPost from "./Components/Post/EditPost";
 
-import Profile from "./Components/Profile/Profile";
+import CreateComment from "./Components/Comment/CreateComment";
 
+import Profile from "./Components/Profile/Profile";
 
 import "./App.css";
 
@@ -63,12 +64,12 @@ export default function App() {
           <Route path="/register" component={Register} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
-
+          {/* Post Routes */}
           <Route path="/add-post" component={CreatePost} />
           <Route path="/view-post/:id" component={ViewPost} />
           <Route path="/edit-post/:id" component={EditPost} />
-
-          {/* Post Routes */}
+          {/* Comment Routes */}
+          <Route path="/add-comment" component={CreateComment} />
         </Switch>
         <Footer />
       </UserContext.Provider>
