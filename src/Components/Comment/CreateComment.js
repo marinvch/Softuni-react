@@ -35,16 +35,15 @@ const CreateComment = ({ props }) => {
         data.date = new Date();
         data.author = userData.user.username;
       }
-      console.log(data);
+
       //Sending Post Request to the backend
       await axios.post(`${url}/comments/add`, data, {
         headers: {
           "x-auth-token": userData.token,
         },
       });
-
+      history.push("/");
       //Relocating to post Page
-      history.go(`/view-post/${id}`);
     } catch (err) {
       console.error(err);
     }

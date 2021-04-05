@@ -87,3 +87,7 @@ li {
   color: green;
   cursor: pointer;
 }
+
+.spiner{
+  align-content: center;
+}

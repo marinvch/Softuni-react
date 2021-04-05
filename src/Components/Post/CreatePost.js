@@ -2,7 +2,9 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
+
 import "./Styles/Createpost.css";
+
 import { url } from "../../Api/index";
 import axios from "axios";
 

@@ -1,4 +1,4 @@
-export const url = "http://marin-forum.herokuapp.com";
+export const url = "https://marin-forum.herokuapp.com";
 
 
 

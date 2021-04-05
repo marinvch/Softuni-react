@@ -19,6 +19,7 @@ const ViewPost = (props) => {
       await axios.all([
         await axios.get(`${url}/posts/${id}`).then((res) => {
           setPost(res.data);
+          console.log(res.data);
         }),
       ]);
     };
@@ -29,7 +30,7 @@ const ViewPost = (props) => {
   return (
     <>
       {!post.title || !post.content ? (
-        <CircularProgress />
+        <CircularProgress className="spiner" />
       ) : (
         <section className="post-wrapper">
           <section className="current-post">
@@ -38,23 +39,21 @@ const ViewPost = (props) => {
           </section>
 
           <section className="comments-wrapper">
-            {post.comments
-              .map((c) => {
-                return (
-                  <li className="item-wrapper" key={c._id}>
-                    <section className="comment-content">
-                      <p>{c.content}</p>
-                    </section>
-                    <section className="comment-details">
-                      <p>createdBy:{c.author} </p>
-                      <p>createdAt: {moment(`${c.createdAt}`).fromNow()} </p>
-                    </section>
-                  </li>
-                );
-              })
-              .reverse()}
+            {post.comments.map((c) => {
+              return (
+                <li className="item-wrapper" key={c._id}>
+                  <section className="comment-content">
+                    <p>{c.content}</p>
+                  </section>
+                  <section className="comment-details">
+                    <p>createdBy:{c.author} </p>
+                    <p>createdAt: {moment(`${c.createdAt}`).fromNow()} </p>
+                  </section>
+                </li>
+              );
+            })}
           </section>
-          {userData.user ? <CreateComment props={props} /> : <></>}
+          {userData.user ? <CreateComment props={props} /> : <><p>Need to be logged in to comment this post</p></>}
         </section>
       )}
     </>
