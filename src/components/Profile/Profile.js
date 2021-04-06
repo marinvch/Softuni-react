@@ -17,6 +17,7 @@ function Profile() {
         },
       })
       .then((res) => {
+        console.log(res.data)
         setPosts(res.data.posts.length);
       });
   }, [userData.token]);

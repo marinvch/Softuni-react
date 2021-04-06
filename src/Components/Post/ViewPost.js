@@ -6,11 +6,16 @@ import "./Styles/Viewpost.css";
 import UserContext from "../../Context/UserContext";
 import CreateComment from "../Comment/CreateComment";
 import moment from "moment";
+import AddIcon from "@material-ui/icons/Add";
 
 const ViewPost = (props) => {
   const { userData } = useContext(UserContext);
   const [post, setPost] = useState({});
-  //const [comments, setComments] = useState([]);
+  const [showComment, setShowComment] = useState(false);
+
+  const showCommentInput = () => {
+    setShowComment(!showComment);
+  };
 
   useEffect(() => {
     let id = props.match.params.id;
@@ -19,7 +24,6 @@ const ViewPost = (props) => {
       await axios.all([
         await axios.get(`${url}/posts/${id}`).then((res) => {
           setPost(res.data);
-          console.log(res.data);
         }),
       ]);
     };
@@ -30,30 +34,43 @@ const ViewPost = (props) => {
   return (
     <>
       {!post.title || !post.content ? (
-        <CircularProgress className="spiner" />
+        <CircularProgress />
       ) : (
         <section className="post-wrapper">
           <section className="current-post">
             <p className="current-post-title">{post.title}</p>
             <p>{post.content}</p>
           </section>
-
+          {userData.user ? (
+            <>
+              <p>
+                <AddIcon className="addComment" onClick={showCommentInput} />
+              </p>
+              {showComment && <CreateComment props={props} />}
+            </>
+          ) : (
+            <>
+              <p>Need to be logged in to comment this post</p>
+            </>
+          )}
           <section className="comments-wrapper">
-            {post.comments.map((c) => {
-              return (
-                <li className="item-wrapper" key={c._id}>
-                  <section className="comment-content">
-                    <p>{c.content}</p>
-                  </section>
-                  <section className="comment-details">
-                    <p>createdBy:{c.author} </p>
-                    <p>createdAt: {moment(`${c.createdAt}`).fromNow()} </p>
-                  </section>
-                </li>
-              );
-            })}
+            {post.comments
+              .map((c) => {
+                return (
+                  <li className="item-wrapper" key={c._id}>
+                    <section className="comment-content">
+                      <p>{c.content}</p>
+                    </section>
+                    <section className="comment-details">
+                      <p>createdBy: {c.author} </p>
+
+                      <p>createdAt: {moment(`${c.createdAt}`).fromNow()}</p>
+                    </section>
+                  </li>
+                );
+              })
+              .reverse()}
           </section>
-          {userData.user ? <CreateComment props={props} /> : <><p>Need to be logged in to comment this post</p></>}
         </section>
       )}
     </>

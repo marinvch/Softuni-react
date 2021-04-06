@@ -1,5 +1,7 @@
 .post-wrapper {
   display: flex;
+  justify-content: center;
+  align-content: center;
 }
 li {
   padding: 5px 10px;
@@ -26,7 +28,6 @@ li {
   color: rgb(190, 170, 170);
 }
 
-
 .details {
   padding-top: 10px;
   display: flex;
@@ -51,13 +52,12 @@ li {
   justify-content: flex-end;
 }
 
-.like-wrapper{
+.like-wrapper {
   display: flex;
   text-align: center;
   justify-content: space-between;
   align-items: center;
 }
-
 
 .like-btn:hover {
   color: green;
@@ -69,6 +69,6 @@ li {
   cursor: pointer;
 }
 
-.date{
+.date {
   width: 80px;
 }

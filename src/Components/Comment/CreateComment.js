@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
+
 import UserContext from "../../Context/UserContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import "./Styles/CreateComment.css";
-
+import { useHistory } from "react-router-dom";
 import { url } from "../../Api/index";
 import axios from "axios";
 
@@ -42,7 +42,8 @@ const CreateComment = ({ props }) => {
           "x-auth-token": userData.token,
         },
       });
-      history.push("/");
+      history.push(`/`);
+
       //Relocating to post Page
     } catch (err) {
       console.error(err);
@@ -63,7 +64,7 @@ const CreateComment = ({ props }) => {
               placeholder="enter your comment"
               onChange={(e) => setData({ ...data, content: e.target.value })}
             />
-            <button type="submit">Add Comment</button>
+            <button type="submit">Save new Comment</button>
           </form>
         </section>
       )}

@@ -66,10 +66,10 @@ export default function App() {
           <Route path="/profile" component={Profile} />
           {/* Post Routes */}
           <Route path="/add-post" component={CreatePost} />
-          <Route path="/view-post/:id" component={ViewPost} />
+          <Route exact path="/view-post/:id" component={ViewPost} />
           <Route path="/edit-post/:id" component={EditPost} />
           {/* Comment Routes */}
-          <Route path="/add-comment" component={CreateComment} />
+          <Route exact path="/add-comment" component={CreateComment} />
         </Switch>
         <Footer />
       </UserContext.Provider>

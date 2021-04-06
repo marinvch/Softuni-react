@@ -72,7 +72,9 @@ function Post(props) {
   return (
     <section className="post-wrapper">
       {!posts.length ? (
-        <CircularProgress />
+        <div className="spinner-wrapper">
+          <CircularProgress className="spin" />
+        </div>
       ) : (
         <>
           {userData.user ? (
@@ -114,6 +116,7 @@ function Post(props) {
                           <p className="date">
                             Created: {moment(`${post.createdAt}`).fromNow()}
                           </p>
+                          <p> {post.comments.length} comments</p>
 
                           <Link
                             className="link-item"
@@ -157,6 +160,7 @@ function Post(props) {
                           <p>
                             Created: {moment(`${post.createdAt}`).fromNow()}
                           </p>
+                          <p>{post.comments.length} comments</p>
                         </section>
                       </section>
                     </li>

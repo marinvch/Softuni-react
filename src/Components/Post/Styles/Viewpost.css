@@ -2,6 +2,7 @@
   display: flex;
   width: 90%;
 }
+
 .comments-wrapper {
   display: flex;
   justify-content: space-between;
@@ -88,6 +89,7 @@ li {
   cursor: pointer;
 }
 
-.spiner{
-  align-content: center;
+.addComment:hover {
+  cursor: pointer;
+  color: yellow;
 }
