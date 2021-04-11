@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 
 import UserContext from "../../Context/UserContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 import "./Styles/CreateComment.css";
 import { useHistory } from "react-router-dom";

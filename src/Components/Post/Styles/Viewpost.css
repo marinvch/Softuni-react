@@ -71,7 +71,7 @@ li {
 .user {
   width: 50%;
   display: flex;
-  justify-content: flex-start;
+
   align-items: center;
 }
 .info p {
@@ -81,7 +81,6 @@ li {
   display: flex;
   width: 50%;
   align-items: center;
-  justify-content: flex-end;
 }
 
 .like-btn:hover {

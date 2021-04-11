@@ -48,7 +48,63 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ### `Application Description`
 
 This app is basic forum type.
+ 
 
+### Arhitecture
+my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+└── src
+    ├──Api
+        ├── index.js
+    ├── Components
+          ├── Auth
+              ├── Styles
+                  ├── Login.css
+                  ├── Register.css
+              ├── Login.js
+              ├── Register.js
+          ├── Comment
+              ├── Styles
+                  ├── CreateComment.css
+              ├── CreateComment.js
+          ├── Post
+              ├── Styles
+                  ├── CreateComment.css
+                  ├── Post.css
+                  ├── Viewpost.css
+              ├── CreatePost.js
+              ├── EditPost.js
+              ├── Posts.js
+              ├── ViewPost.js
+              ├── Profile
+                  ├── Profile.js
+                  ├── User.js
+          ├── Styles
+              ├── Footer.css
+              ├── Header.css
+              ├── Home.css   
+          ├── Footer.js
+          ├── Header.js
+          ├── Home.js
+          ├── Context
+              ├── UserContext.js
+          ├── App.css
+          ├── App.js
+          ├── Index.css
+          ├── Index.js
+   
+   
+   
 
 Used tech stack is: [Express,Mongoose,React,React-Material-UI]
 

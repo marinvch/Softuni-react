@@ -17,7 +17,6 @@ function Profile() {
         },
       })
       .then((res) => {
-        console.log(res.data)
         setPosts(res.data.posts.length);
       });
   }, [userData.token]);
@@ -27,8 +26,8 @@ function Profile() {
         <CircularProgress />
       ) : (
         <section className="profile">
-          <h1 className="username"> Username: {userData.user.username}</h1>
-          <section>Number of posts: {posts}</section>
+          <h1 className="username"> Username: {userData.user.username} </h1>{" "}
+          <section> Number of posts: {posts} </section>{" "}
         </section>
       )}
     </>

@@ -18,6 +18,7 @@ li {
 .content {
   width: 100%;
   font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
 .link-item {
@@ -29,6 +30,7 @@ li {
 }
 
 .details {
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
   padding-top: 10px;
   display: flex;
   justify-content: space-between;
@@ -37,7 +39,7 @@ li {
 }
 
 .user {
-  width: 50%;
+  width: 80%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -47,16 +49,16 @@ li {
 }
 .info {
   display: flex;
-  width: 50%;
+  width: 20%;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
-.like-wrapper {
+.like-details {
   display: flex;
-  text-align: center;
+  align-content: center;
   justify-content: space-between;
-  align-items: center;
+  width: 50%;
 }
 
 .like-btn:hover {
@@ -70,5 +72,6 @@ li {
 }
 
 .date {
-  width: 80px;
+  display: flex;
+  width: 100%;
 }

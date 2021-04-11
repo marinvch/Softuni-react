@@ -10,6 +10,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
 import "./Styles/Post.css";
+import CommentIcon from "@material-ui/icons/Comment";
 
 import moment from "moment";
 import axios from "axios";
@@ -29,35 +30,46 @@ function Post(props) {
       })
       .then((res) => {
         console.log(res);
+        alert("You deleted the post");
         history.go("/");
       });
   };
 
   const LikePost = async (id) => {
-    await axios
-      .put(`${url}/posts/like/${id}`, likes, {
-        headers: {
-          "x-auth-token": userData.token,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        setLikes(res.data);
-        history.push("/");
-      });
+    try {
+      await axios
+        .put(`${url}/posts/like/${id}`, likes, {
+          headers: {
+            "x-auth-token": userData.token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setLikes(res.data);
+
+          history.push("/");
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const disLikePost = async (id) => {
-    await axios
-      .put(`${url}/posts/dislike/${id}`, likes, {
-        headers: {
-          "x-auth-token": userData.token,
-        },
-      })
-      .then((res) => {
-        setLikes(res.data);
-        history.push("/");
-      });
+    try {
+      await axios
+        .put(`${url}/posts/dislike/${id}`, likes, {
+          headers: {
+            "x-auth-token": userData.token,
+          },
+        })
+        .then((res) => {
+          setLikes(res.data);
+
+          history.push("/");
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -97,38 +109,32 @@ function Post(props) {
                           <p>Author: {post.author.username} </p>
                         </section>
                         <section className="info">
-                          <div className="like-wrapper">
-                            <p>
-                              <ThumbUpIcon
-                                className="like-btn"
-                                onClick={() => LikePost(post._id)}
-                              />
-                            </p>
-                            <p className="likes">{post.likes} </p>
-                            <p>
-                              <ThumbDownAltIcon
-                                className="dislike-btn"
-                                onClick={() => disLikePost(post._id)}
-                              />
-                            </p>
-                          </div>
-
-                          <p className="date">
-                            Created: {moment(`${post.createdAt}`).fromNow()}
-                          </p>
-                          <p> {post.comments.length} comments</p>
-
-                          <Link
-                            className="link-item"
-                            to={`/edit-post/${post._id}`}
-                          >
-                            <EditIcon />
-                          </Link>
-                          <Link className="link-item" to="/">
-                            <DeleteForeverIcon
-                              onClick={() => deletePost(post._id)}
+                          <div className="like-details">
+                            <ThumbUpIcon
+                              className="like-btn"
+                              onClick={() => LikePost(post._id)}
                             />
-                          </Link>
+                            {post.likes}
+                            <ThumbDownAltIcon
+                              className="dislike-btn"
+                              onClick={() => disLikePost(post._id)}
+                            />
+                            Created: {moment(`${post.createdAt}`).fromNow()}
+                            <CommentIcon /> {post.comments.length}
+                          </div>
+                          <div className="post-actions">
+                            <Link
+                              className="link-item"
+                              to={`/edit-post/${post._id}`}
+                            >
+                              <EditIcon />
+                            </Link>
+                            <Link className="link-item" to="/">
+                              <DeleteForeverIcon
+                                onClick={() => deletePost(post._id)}
+                              />
+                            </Link>
+                          </div>
                         </section>
                       </section>
                     </li>

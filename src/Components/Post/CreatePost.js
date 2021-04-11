@@ -45,7 +45,7 @@ const CreatePost = () => {
       //Relocating to home Page
       history.push(`/`);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
 

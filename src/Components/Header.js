@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import UserContext from "../Context/UserContext";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Styles/Header.css";
 
 const Header = () => {
-  const { userData, setUserData } = useContext(UserContext);
-  const history = useHistory();
+  const { userData } = useContext(UserContext);
 
   const logout = () => {
     localStorage.clear();
