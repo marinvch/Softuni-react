@@ -6,7 +6,7 @@ import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 import "./Styles/CreateComment.css";
 import { useHistory } from "react-router-dom";
-import { url } from "../../Api/index";
+import {url}  from "../../Api/index";
 import axios from "axios";
 
 const CreateComment = ({ props }) => {

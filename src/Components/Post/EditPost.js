@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UserContext from "../../Context/UserContext";
-import { url } from "../../Api/index";
+import {url}  from "../../Api/index";
 import axios from "axios";
 
 const EditPost = (props) => {

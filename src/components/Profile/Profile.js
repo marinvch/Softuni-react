@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../../Context/UserContext";
 import "./Styles/Profile.css";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { url } from "../../Api/index";
+import {url}  from "../../Api/index";
 import axios from "axios";
 
 function Profile() {

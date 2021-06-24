@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import UserContext from "../../Context/UserContext";
 import { url } from "../../Api/index";
 import { Link, useHistory } from "react-router-dom";
-
+import { useSelector } from 'react-redux';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import ThumbDownAltIcon from "@material-ui/icons/ThumbDownAlt";
@@ -16,74 +16,76 @@ import moment from "moment";
 import axios from "axios";
 
 function Post(props) {
+  const postsRedux = useSelector((state) => state.posts);
+  console.log(postsRedux )
   const { userData } = useContext(UserContext);
   const history = useHistory();
   let [posts, setPosts] = useState([]);
   let [likes, setLikes] = useState();
 
-  const deletePost = async (id) => {
-    await axios
-      .delete(`${url}/posts/delete/${id}`, {
-        headers: {
-          "x-auth-token": userData.token,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        alert("You deleted the post");
-        history.go("/");
-      });
-  };
+  // const deletePost = async (id) => {
+  //   await axios
+  //     .delete(`${url}/posts/delete/${id}`, {
+  //       headers: {
+  //         "x-auth-token": userData.token,
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       alert("You deleted the post");
+  //       history.go("/");
+  //     });
+  // };
 
-  const LikePost = async (id) => {
-    try {
-      await axios
-        .put(`${url}/posts/like/${id}`, likes, {
-          headers: {
-            "x-auth-token": userData.token,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setLikes(res.data);
+  // const LikePost = async (id) => {
+  //   try {
+  //     await axios
+  //       .put(`${url}/posts/like/${id}`, likes, {
+  //         headers: {
+  //           "x-auth-token": userData.token,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //         setLikes(res.data);
 
-          history.push("/");
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //         history.push("/");
+  //       });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  const disLikePost = async (id) => {
-    try {
-      await axios
-        .put(`${url}/posts/dislike/${id}`, likes, {
-          headers: {
-            "x-auth-token": userData.token,
-          },
-        })
-        .then((res) => {
-          setLikes(res.data);
+  // const disLikePost = async (id) => {
+  //   try {
+  //     await axios
+  //       .put(`${url}/posts/dislike/${id}`, likes, {
+  //         headers: {
+  //           "x-auth-token": userData.token,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         setLikes(res.data);
 
-          history.push("/");
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  //         history.push("/");
+  //       });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  useEffect(() => {
-    const getData = async () => {
-      await axios.get(`${url}/posts/`).then((res) => {
-        setPosts(res.data);
-      });
-    };
-    getData();
-  }, [likes]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     await axios.get(`${url}/posts/`).then((res) => {
+  //       setPosts(res.data);
+  //     });
+  //   };
+  //   getData();
+  // }, [likes]);
 
   return (
     <section className="post-wrapper">
-      {!posts.length ? (
+      {!postsRedux.length ? (
         <div className="spinner-wrapper">
           <CircularProgress className="spin" />
         </div>
@@ -91,7 +93,7 @@ function Post(props) {
         <>
           {userData.user ? (
             <>
-              {posts
+              {postsRedux
                 .map((post) => {
                   return (
                     <li key={post._id}>
@@ -112,12 +114,12 @@ function Post(props) {
                           <div className="like-details">
                             <ThumbUpIcon
                               className="like-btn"
-                              onClick={() => LikePost(post._id)}
+                              //onClick={() => LikePost(post._id)}
                             />
                             {post.likes}
                             <ThumbDownAltIcon
                               className="dislike-btn"
-                              onClick={() => disLikePost(post._id)}
+                              //onClick={() => disLikePost(post._id)}
                             />
                             Created: {moment(`${post.createdAt}`).fromNow()}
                             <CommentIcon /> {post.comments.length}
@@ -131,7 +133,7 @@ function Post(props) {
                             </Link>
                             <Link className="link-item" to="/">
                               <DeleteForeverIcon
-                                onClick={() => deletePost(post._id)}
+                                //onClick={() => deletePost(post._id)}
                               />
                             </Link>
                           </div>
@@ -144,7 +146,7 @@ function Post(props) {
             </>
           ) : (
             <>
-              {posts
+              {postsRedux
                 .map((post) => {
                   return (
                     <li key={post._id}>

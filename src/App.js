@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { url } from "./Api/index";
 import axios from "axios";
+import { getPosts } from './Redux/actions/posts';
+import { useDispatch } from 'react-redux';
 import UserContext from "./Context/UserContext";
 
 import Register from "./Components/Auth/Register";
@@ -22,6 +24,8 @@ import Profile from "./Components/Profile/Profile";
 import "./App.css";
 
 export default function App() {
+  const dispatch = useDispatch();
+
   const [userData, setUserData] = useState({
     token: undefined,
     user: undefined,
@@ -51,8 +55,9 @@ export default function App() {
   };
 
   useEffect(() => {
+    dispatch(getPosts())
     checkLoggedIn();
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

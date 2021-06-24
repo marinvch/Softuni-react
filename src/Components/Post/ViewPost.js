@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { url } from "../../Api/index";
+import  {url}  from "../../Api/index";
 import axios from "axios";
 
 import UserContext from "../../Context/UserContext";

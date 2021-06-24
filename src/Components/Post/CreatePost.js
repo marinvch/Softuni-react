@@ -2,13 +2,16 @@ import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import UserContext from "../../Context/UserContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { useDispatch } from 'react-redux';
+import { createPost } from '../../redux/actions'
 
 import "./Styles/Createpost.css";
 
-import { url } from "../../Api/index";
-import axios from "axios";
+
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
+
   const { userData } = useContext(UserContext);
   const history = useHistory();
 
@@ -20,8 +23,9 @@ const CreatePost = () => {
     author: "",
   });
 
-  const addPost = async (e) => {
+  const addPost = (e) => {
     e.preventDefault();
+
 
     try {
       //Validation
@@ -36,11 +40,12 @@ const CreatePost = () => {
       }
 
       //Sending Post Request to the backend
-      await axios.post(`${url}/posts/createpost`, data, {
+      dispatch(createPost(data, {
         headers: {
           "x-auth-token": userData.token,
         },
-      });
+      }))
+
 
       //Relocating to home Page
       history.push(`/`);
