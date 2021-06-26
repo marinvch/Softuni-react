@@ -1,83 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { url } from "./Api/index";
-import axios from "axios";
-import { getPosts } from './Redux/actions/posts';
-import { useDispatch } from 'react-redux';
-import UserContext from "./Context/UserContext";
+import { Container } from '@material-ui/core'
 
-import Register from "./Components/Auth/Register";
-import Login from "./Components/Auth/Login";
-
-import Header from "./Components/Header";
-import Footer from "./Components/Footer";
-
-import Home from "./Components/Home";
-import CreatePost from "./Components/Post/CreatePost";
-import ViewPost from "./Components/Post/ViewPost";
-import EditPost from "./Components/Post/EditPost";
-
-import CreateComment from "./Components/Comment/CreateComment";
-
-import Profile from "./Components/Profile/Profile";
+import Navbar from "./Components/Navbar/Navbar";
+import Home from "./Components/Home/Home";
+import Auth from './Components/Auth/Auth'
 
 import "./App.css";
 
 export default function App() {
-  const dispatch = useDispatch();
-
-  const [userData, setUserData] = useState({
-    token: undefined,
-    user: undefined,
-  });
-
-  const checkLoggedIn = async () => {
-    let token = localStorage.getItem("auth-token");
-    if (token === null) {
-      localStorage.setItem("auth-token", "");
-      token = "";
-    }
-    //check if the token is valid
-    let tokenRes = await axios.post(`${url}/auth/validtoken`, null, {
-      headers: {
-        "x-auth-token": token,
-      },
-    });
-
-    if (tokenRes.data) {
-      let userRes = await axios.get(`${url}/auth/currentuser`, {
-        headers: {
-          "x-auth-token": token,
-        },
-      });
-      setUserData({ token, user: userRes.data });
-    }
-  };
-
-  useEffect(() => {
-    dispatch(getPosts())
-    checkLoggedIn();
-  }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ userData, setUserData }}>
-        <Header />
+      <Container fullWidth>
+        <Home />
+        <Navbar />
         <Switch>
-          {/* Navigation */}
-          <Route exact path="/" component={Home} />
-          <Route path="/register" component={Register} />
-          <Route path="/login" component={Login} />
-          <Route path="/profile" component={Profile} />
-          {/* Post Routes */}
-          <Route path="/add-post" component={CreatePost} />
-          <Route exact path="/view-post/:id" component={ViewPost} />
-          <Route path="/edit-post/:id" component={EditPost} />
-          {/* Comment Routes */}
-          <Route exact path="/add-comment" component={CreateComment} />
+          <Route exact path="/" component={ Home } />
+          <Route path="/auth" component={ Auth } />
         </Switch>
-        <Footer />
-      </UserContext.Provider>
+      </Container>
     </BrowserRouter>
   );
 }
