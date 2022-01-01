@@ -1,11 +1,9 @@
 import React from "react";
 
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Styles/Header.css";
 
 const Header = () => {
-
-
   return (
     <header className="header">
       <section className="logo">
@@ -21,11 +19,8 @@ const Header = () => {
         <Link className="nav-item" to="/profile">
           Profile
         </Link>
-        <Link className="nav-item">
-          Logout
-        </Link>
+        <Link className="nav-item">Logout</Link>
       </section>
-
     </header>
   );
 };
