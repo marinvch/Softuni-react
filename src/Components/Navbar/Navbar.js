@@ -7,7 +7,6 @@ import {
   Avatar,
   Container,
   Box,
-  IconButton,
 } from "@mui/material/";
 
 import { Link, useHistory } from "react-router-dom";
@@ -32,10 +31,18 @@ const Navbar = () => {
     history.push("/");
   };
   return (
-    <Toolbar className="toolbar">
+    <Toolbar>
       <Container>
         <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
+          <AppBar
+            position="static"
+            style={{
+              background: "#39796b",
+              color: "#212121",
+              borderBottomLeftRadius: "15px",
+              borderBottomRightRadius: "15px",
+            }}
+          >
             <Toolbar>
               <Typography
                 variant="h6"
