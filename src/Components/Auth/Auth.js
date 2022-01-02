@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import Login from "./Login";
 
-function Auth() {
-    return (
-        <div>
+const Auth = () => {
+  return (
+    <div>
+      <Login />
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default Auth
+export default Auth;

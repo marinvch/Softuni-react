@@ -22,10 +22,9 @@ const Post = () => {
           <CircularProgress />
         </Box>
       ) : (
-        posts.posts?.map((post) => {
-          console.log(post);
+        posts.posts?.map((post, id) => {
           return (
-            <Box sx={{ flexGrow: 1 }}>
+            <Box sx={{ flexGrow: 1 }} key={id}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <p>{post.title}</p>

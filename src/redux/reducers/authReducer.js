@@ -12,7 +12,7 @@ import {
 import { AUTH_ERROR, LOGIN_FAILED, REGISTER_FAILED } from "../types/errorTypes";
 
 const initialState = {
-  token: localStorage.getItem("token"),
+  token: null,
   isAuthenticated: false,
   isLoading: false,
   user: null,
@@ -24,6 +24,14 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+    }
+    case LOGIN_USER: {
+      return {
+        ...state,
+        isAuthenticated: true,
+        token: action.payload.token,
+        user: action.payload.user,
       };
     }
     case USER_LOADED: {
@@ -46,7 +54,8 @@ const authReducer = (state = initialState, action) => {
 
     case AUTH_ERROR:
     case LOGIN_FAILED:
-    case LOGOUT_SUCCESS:
+    case LOGOUT_SUCCESS: {
+    }
     case REGISTER_FAILED: {
       return {
         ...state,
