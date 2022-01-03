@@ -3,10 +3,11 @@ import "./Styles/Post.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/postActions";
 import moment from "moment";
-import CircularProgress from "@mui/material/CircularProgress";
-import { Container, Box, Grid, Typography } from "@mui/material/";
-
+import Loader from "../../common/Loader";
 import {
+  Container,
+  Grid,
+  Typography,
   List,
   ListItem,
   Divider,
@@ -23,17 +24,15 @@ const Post = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
-  console.log(posts);
   return (
-    <Container fluid>
+    <Container>
       {posts === null ? (
-        <List sx={{ width: "100%", maxWidth: 1200 }}>
-          <CircularProgress />
-        </List>
+        <Loader />
       ) : (
         posts.posts?.map((post, id) => {
           return (
             <List
+              key={id}
               sx={{
                 width: "100%",
                 maxWidth: 1200,

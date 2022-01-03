@@ -4,7 +4,7 @@ import {
   CREATE_POST,
   DELETE_POST,
 } from "../actions/postActions";
-const initialState = [];
+const initialState = null;
 
 const postsReducer = (state = initialState, action) => {
   switch (action.type) {
