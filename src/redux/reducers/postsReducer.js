@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  VIEW_POST,
   EDIT_POST,
   CREATE_POST,
   DELETE_POST,
@@ -11,6 +12,12 @@ const postsReducer = (state = initialState, action) => {
     case GET_POSTS: {
       return {
         posts: action.payload,
+      };
+    }
+    case VIEW_POST: {
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post.id === action.payload),
       };
     }
     case DELETE_POST: {

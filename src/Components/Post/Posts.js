@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Styles/Post.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/postActions";
@@ -14,15 +14,23 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
+  Box,
 } from "@mui/material/";
+
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Post = () => {
   const posts = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
+
+  const handleViewPost = (postId) => {
+    history.push(`posts/${postId}`);
+  };
 
   return (
     <Container>
@@ -30,9 +38,11 @@ const Post = () => {
         <Loader />
       ) : (
         posts.posts?.map((post, id) => {
+          const { _id } = post;
+          console.log(post);
           return (
             <List
-              key={id}
+              key={_id}
               sx={{
                 width: "100%",
                 maxWidth: 1200,
@@ -46,15 +56,30 @@ const Post = () => {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={post.title}
-                  secondary={
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      color="text.primary"
+                  primary={
+                    <Box
+                      onClick={() => handleViewPost(_id)}
+                      style={{ cursor: "pointer" }}
                     >
-                      {post.content}
-                    </Typography>
+                      <Typography
+                        sx={{ fontWeight: "light" }}
+                        fontSize={26}
+                        component="div"
+                        variant="body2"
+                        color="#b2fab4"
+                      >
+                        {post.title}
+                      </Typography>
+                      <Typography
+                        lineHeight={1}
+                        fontSize={12}
+                        component="div"
+                        variant="body2"
+                        color="#212121"
+                      >
+                        {post.content}
+                      </Typography>
+                    </Box>
                   }
                 />
                 <Divider />

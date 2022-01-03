@@ -39,10 +39,16 @@ const Login = () => {
 
   return (
     <Box className="login-wrapper">
-      <Typography variant="h5" component="h2" style={{ marginTop: "15px" }}>
+      <Typography
+        variant="h5"
+        component="h2"
+        style={{ marginTop: "15px" }}
+        color="#b2fab4"
+      >
         Please enter email and password
       </Typography>
       <TextField
+        sx={{ color: "yellow" }}
         id="email"
         name="email"
         type="text"

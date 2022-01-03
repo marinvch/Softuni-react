@@ -5,7 +5,7 @@ import Posts from "../Post/Posts";
 function Home() {
   return (
     <Container>
-      <Grid container justify="space-between" alignItems="center">
+      <Grid container justify="space-between" alignItems="center" mt={5}>
         <Posts />
       </Grid>
     </Container>
