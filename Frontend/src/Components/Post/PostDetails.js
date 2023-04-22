@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Styles/Viewpost.css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { viewCurrentPost } from "../../redux/actions/postActions";
+import { viewCurrentPost } from "../../redux/features/postActions";
 
 import { useSelector, useDispatch } from "react-redux";
 

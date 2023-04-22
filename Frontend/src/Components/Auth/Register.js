@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux"; // Add this line
 
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Styles/Register.css";
+
+import { registerSuccess } from "../../redux/features/authSlice";
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -14,11 +17,13 @@ const Register = () => {
     repeatPassword: null,
   });
 
+  const dispatch = useDispatch();
+
   const history = useHistory();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    console.log(e.target)
+
     setUserData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -28,7 +33,23 @@ const Register = () => {
   const handleLogin = () => {
     history.push("/auth");
   };
-  console.log(userData)
+
+  const handleSignup = (e) => {
+    // Dispatch the registerSuccess action with the user data
+    e.preventDefault();
+    const { email, username, password, repeatPassword } = userData
+    if (!email || !username || !password || !repeatPassword) {
+      alert("All fields are required");
+      return;
+    }
+    console.log(userData)
+    dispatch(registerSuccess(userData));
+
+    // Redirect to the dashboard page (or wherever you want to redirect)
+    history.push("/dashboard");
+  };
+
+
   return (
     <Box className="login-wrapper">
       <Typography variant="h5" component="h2" style={{ marginTop: "15px" }}>
@@ -74,7 +95,7 @@ const Register = () => {
         onChange={(e) => handleInput(e)}
         required
       />
-      <Button variant="contained">SignUp</Button>
+      <Button variant="contained" onClick={(e) => handleSignup(e)}>SignUp</Button>
       <Stack>
         <Typography style={{ marginTop: "15px" }}>
           Already have an account

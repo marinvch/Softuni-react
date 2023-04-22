@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Container } from "@mui/material/";
 
-import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Components/Home/Home";
-import Auth from "./Components/Auth/Auth";
-import Register from "./Components/Auth/Register";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home";
+import Auth from "./components/Auth/Auth";
+import Register from "./components/Auth/Register";
 
-import PostDetails from "./Components/Post/PostDetails";
+import PostDetails from "./components/Post/PostDetails";
 
 import { useSelector } from "react-redux";
 

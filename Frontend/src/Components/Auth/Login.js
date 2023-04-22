@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { loginUser } from "../../redux/actions/authActions";
+import { loginUser } from "../../redux/features/authSlice";
 
 import "./Styles/Login.css";
 
