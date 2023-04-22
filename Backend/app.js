@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5000;
 
 //Connect to Databse
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/local", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

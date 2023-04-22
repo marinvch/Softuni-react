@@ -1,7 +1,7 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "back-end server for softuni react project",
+  "description": "back-end forum server",
   "main": "app.js",
   "type": "module",
   "scripts": {
@@ -25,8 +25,5 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.4"
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
@@ -18,6 +18,7 @@ const Register = () => {
 
   const handleInput = (e) => {
     const { name, value } = e.target;
+    console.log(e.target)
     setUserData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -27,7 +28,7 @@ const Register = () => {
   const handleLogin = () => {
     history.push("/auth");
   };
-
+  console.log(userData)
   return (
     <Box className="login-wrapper">
       <Typography variant="h5" component="h2" style={{ marginTop: "15px" }}>

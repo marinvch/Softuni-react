@@ -3,7 +3,7 @@ import "./Styles/Post.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getPosts } from "../../redux/actions/postActions";
 import moment from "moment";
-import Loader from "../../common/Loader";
+import Loader from "../Spinner/Spinner";
 import {
   Container,
   Grid,
