@@ -11,30 +11,23 @@ import {
 
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { authLogout } from "../../redux/services/authService";
+import { logoutSuccess } from "../../redux/features/authSlice";
 
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch()
-  const [user, setUser] = useState(null);
   const history = useHistory();
-
-  // useEffect(() => {
-  //   setUser(localStorage.getItem("authenticated"));
-  // }, [user]);
-
-  useEffect(() => {
-    console.log(auth)
-  })
 
   const handleHome = () => {
     history.push("/");
   };
   const logoutHandler = () => {
-    authLogout();
-    setUser(null);
-    history.push("/");
+    dispatch(logoutSuccess());
+    localStorage.removeItem('auth') 
+
   };
+
+  console.log(auth)
 
   return (
     <Toolbar>
@@ -43,10 +36,11 @@ const Navbar = () => {
           <AppBar
             position="static"
             style={{
-              background: "#39796b",
+              background: "white",
               color: "#212121",
               borderBottomLeftRadius: "15px",
               borderBottomRightRadius: "15px",
+              marginBottom: "2rem"
             }}
           >
             <Toolbar>
@@ -59,17 +53,19 @@ const Navbar = () => {
               >
                 MERN FORUM
               </Typography>
-              {auth.token !== null || user !== null ? (
+           
+              {auth?.isAuthenticated || localStorage.getItem('auth') ? (
                 <>
                   <Avatar
                     className="Avatar"
-                    alt={auth?.username}
+                    alt={auth?.user?.username}
                     sx={{ mr: 2 }}
+                    component={Link}
+                    to="/profile"
                   >
-                    {auth.user?.username.charAt(0)}
+                    {auth?.user?.username?.charAt(0).toUpperCase()}
                   </Avatar>
                   <Button
-                    component={Link}
                     color="inherit"
                     onClick={() => logoutHandler()}
                   >
