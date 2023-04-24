@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-import { authUser } from "../../redux/services/authService";
-import { userLoading } from "../../redux/features/authSlice";
+import { loginUser } from "../../redux/services/authService";
+import { userLoading, loginSuccess } from "../../redux/features/authSlice";
 
 import "./Styles/Login.css";
 
@@ -18,12 +18,21 @@ const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const authenticateUser = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    authUser(userData).then((res) => {
-      console.log(res.data)
-      dispatch(userLoading(res.data))
-    }).then(history.push('/dashbord'));
+    try {
+      if (userData !== null) {
+        loginUser(userData).then((res) => {
+          localStorage.setItem('auth', res.data.token)
+          console.log(res.data)
+          dispatch(loginSuccess(res.data))
+        }).then(history.push('/dashbord'));
+      }
+    } catch (err) {
+      console.log(err)
+    }
+
+
   };
 
   const handleInput = (e) => {
@@ -48,7 +57,6 @@ const Login = () => {
         Please enter email and password
       </Typography>
       <TextField
-        sx={{ color: "yellow" }}
         id="email"
         name="email"
         type="text"
@@ -67,7 +75,7 @@ const Login = () => {
         onChange={(e) => handleInput(e)}
         required
       />
-      <Button variant="contained" onClick={(e) => authenticateUser(e)}>
+      <Button variant="contained" onClick={(e) => handleLogin(e)}>
         Login
       </Button>
 

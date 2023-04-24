@@ -5,10 +5,10 @@ import User from "../models/user.js";
 export const register = async (req, res) => {
   // console.log(req.body)
   try {
-    let { email, password, repeatPassword , username } = req.body;
+    let { email, password, repeatPassword, username } = req.body;
     console.log(req.body)
     // Validate input fields
-    if (!email || !password || !repeatPassword ) {
+    if (!email || !password || !repeatPassword) {
       return res.status(400).json({ msg: "Email, password, and confirm password are required fields." });
     }
 
@@ -73,17 +73,15 @@ export const login = async (req, res) => {
         .json({ msg: "No account with this email has been registered." });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    
+
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials." });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.json({
       token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-      },
+      id: user._id,
+      username: user.username,
+      email: user.email,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

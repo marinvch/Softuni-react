@@ -13,6 +13,7 @@ import PostDetails from "./components/Post/PostDetails";
 import { useSelector } from "react-redux";
 
 import "./App.css";
+import Profile from "./components/Profile/Profile";
 
 export default function App() {
   const isUserLogedIn = useSelector((state) => state.auth.token);
@@ -30,6 +31,7 @@ export default function App() {
 
           {/* User Routes */}
           <Route path="/dashbord" component={User} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </Container>
     </BrowserRouter>
