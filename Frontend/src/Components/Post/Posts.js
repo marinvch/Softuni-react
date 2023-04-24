@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Styles/Post.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "../../redux/actions/postActions";
+import { fetchPosts } from "../../redux/features/postActions";
 import moment from "moment";
 import Loader from "../Spinner/Spinner";
 import {
@@ -25,7 +25,7 @@ const Post = () => {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getPosts());
+    dispatch(fetchPosts());
   }, [dispatch]);
 
   const handleViewPost = (postId) => {

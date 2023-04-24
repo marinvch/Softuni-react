@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux"; // Add this line
 
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Styles/Register.css";
+
+import { registerSuccess, userLoading, loginUser } from "../../redux/features/authSlice";
+import { registerUser } from "../../redux/services/authService"
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -14,11 +18,13 @@ const Register = () => {
     repeatPassword: null,
   });
 
+  const dispatch = useDispatch();
+
   const history = useHistory();
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    console.log(e.target)
+
     setUserData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -28,9 +34,31 @@ const Register = () => {
   const handleLogin = () => {
     history.push("/auth");
   };
-  console.log(userData)
+  
+  const handleSignup = (e) => {
+    e.preventDefault();
+    const { email, username, password, repeatPassword } = userData;
+    if (!email || !username || !password || !repeatPassword) {
+      alert("All fields are required");
+      return;
+    }
+    dispatch(userLoading());
+    registerUser(userData)
+      .then(response => {
+        dispatch(registerSuccess(response.data));
+        dispatch(loginUser(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("authenticated", true);
+        history.push("/profile");
+      })
+      .catch(error => console.log(error));
+  };
+
+
+
+
   return (
-    <Box className="login-wrapper">
+    <Box className="login-wrapper" stye={{ background: "white" }}>
       <Typography variant="h5" component="h2" style={{ marginTop: "15px" }}>
         Register your Account
       </Typography>
@@ -74,7 +102,7 @@ const Register = () => {
         onChange={(e) => handleInput(e)}
         required
       />
-      <Button variant="contained">SignUp</Button>
+      <Button variant="contained" onClick={(e) => handleSignup(e)}>SignUp</Button>
       <Stack>
         <Typography style={{ marginTop: "15px" }}>
           Already have an account
