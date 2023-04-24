@@ -15,12 +15,17 @@ import { authLogout } from "../../redux/services/authService";
 
 const Navbar = () => {
   const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
   const [user, setUser] = useState(null);
   const history = useHistory();
 
+  // useEffect(() => {
+  //   setUser(localStorage.getItem("authenticated"));
+  // }, [user]);
+
   useEffect(() => {
-    setUser(localStorage.getItem("authenticated"));
-  }, [user]);
+    console.log(auth)
+  })
 
   const handleHome = () => {
     history.push("/");
@@ -30,6 +35,7 @@ const Navbar = () => {
     setUser(null);
     history.push("/");
   };
+
   return (
     <Toolbar>
       <Container>

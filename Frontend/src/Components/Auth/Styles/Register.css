@@ -4,6 +4,7 @@
   width: 100%;
   align-items: center;
   justify-content: center;
+  background-color: white;
 }
 .register-wrapper form {
   padding: 20px;
@@ -20,7 +21,7 @@
 .register-input {
   border-radius: 10px;
   width: 40%;
-  box-shadow: 0 4px 2px -2px black;
+  box-shadow: 0 4px 2px -2px rgb(228, 200, 200);
 }
 
 .register-input:focus::-webkit-input-placeholder {

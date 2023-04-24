@@ -3,7 +3,9 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { loginUser } from "../../redux/features/authSlice";
+
+import { authUser } from "../../redux/services/authService";
+import { userLoading } from "../../redux/features/authSlice";
 
 import "./Styles/Login.css";
 
@@ -18,11 +20,10 @@ const Login = () => {
 
   const authenticateUser = (e) => {
     e.preventDefault();
-
-    const { email, password } = userData;
-
-    dispatch(loginUser(email, password));
-    history.push("/");
+    authUser(userData).then((res) => {
+      console.log(res.data)
+      dispatch(userLoading(res.data))
+    }).then(history.push('/dashbord'));
   };
 
   const handleInput = (e) => {
@@ -43,7 +44,6 @@ const Login = () => {
         variant="h5"
         component="h2"
         style={{ marginTop: "15px" }}
-        color="#b2fab4"
       >
         Please enter email and password
       </Typography>

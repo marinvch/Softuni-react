@@ -7,7 +7,7 @@ import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Styles/Register.css";
 
-import { registerSuccess, userLoading, loginUser } from "../../redux/features/authSlice";
+import { registerSuccess, userLoading, loginSuccess } from "../../redux/features/authSlice";
 import { registerUser } from "../../redux/services/authService"
 
 const Register = () => {
@@ -34,19 +34,16 @@ const Register = () => {
   const handleLogin = () => {
     history.push("/auth");
   };
-  
+
   const handleSignup = (e) => {
     e.preventDefault();
-    const { email, username, password, repeatPassword } = userData;
-    if (!email || !username || !password || !repeatPassword) {
-      alert("All fields are required");
-      return;
-    }
+    // TODO VISUAL VALIDATION
+
     dispatch(userLoading());
     registerUser(userData)
       .then(response => {
         dispatch(registerSuccess(response.data));
-        dispatch(loginUser(response.data));
+        dispatch(loginSuccess(response.data));
         localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("authenticated", true);
         history.push("/profile");
@@ -108,7 +105,7 @@ const Register = () => {
           Already have an account
         </Typography>
         <Button style={{ marginTop: "15px" }} onClick={() => handleLogin()}>
-          <ArrowRightIcon /> Login
+          <ArrowRightIcon /> Register
         </Button>
       </Stack>
     </Box>

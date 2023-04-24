@@ -4,8 +4,9 @@ import { Container } from "@mui/material/";
 
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
-import Auth from "./components/Auth/Auth";
+import Auth from "./pages/authPage";
 import Register from "./components/Auth/Register";
+import User from "./components/Profile/User";
 
 import PostDetails from "./components/Post/PostDetails";
 
@@ -24,8 +25,11 @@ export default function App() {
           <Route exact path="/" component={Home} />
           <Route path="/auth" component={Auth} />
           <Route path="/register" component={Register} />
-          {/* POSTS ROUTES */}
+          {/* Post Routes */}
           <Route path="/posts/:id" component={PostDetails} />
+
+          {/* User Routes */}
+          <Route path="/dashbord" component={User} />
         </Switch>
       </Container>
     </BrowserRouter>
