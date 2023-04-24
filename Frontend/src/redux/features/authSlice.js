@@ -30,6 +30,7 @@ const authSlice = createSlice({
     registerSuccess(state, action) {
       state.isAuthenticated = true
       state.isLoading = false
+      state.user = action.payload;
     }
   }
 })

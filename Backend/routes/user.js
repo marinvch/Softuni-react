@@ -14,7 +14,7 @@ import {
 router.post("/register", register);
 router.post("/login", login);
 router.delete("/delete", deleteUser);
-router.get("/currentuser", auth, currentUser);
-router.post("/validtoken", validToken);
+router.get("/currentUser", auth, currentUser);
+router.post("/validToken", validToken);
 
 export default router;

@@ -3,44 +3,61 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 
 export const register = async (req, res) => {
+  // console.log(req.body)
   try {
-    let { email, password, confirmPassword, username } = req.body;
+    let { email, password, repeatPassword , username } = req.body;
+    console.log(req.body)
+    // Validate input fields
+    if (!email || !password || !repeatPassword ) {
+      return res.status(400).json({ msg: "Email, password, and confirm password are required fields." });
+    }
 
-    // validate
-    if (!username) username = email;
+    if (password !== repeatPassword) {
+      return res.status(400).json({ msg: "Passwords must match." });
+    }
 
-    if (!email || !password || !confirmPassword || !username)
-      return res.status(400).json({ msg: "Not all fields have been entered." });
-    if (password.length < 5)
-      return res
-        .status(400)
-        .json({ msg: "The password needs to be at least 5 characters long." });
-    if (password !== confirmPassword)
-      return res
-        .status(400)
-        .json({ msg: "Enter the same password twice for verification." });
+    if (password.length < 5) {
+      return res.status(400).json({ msg: "Password must be at least 5 characters long." });
+    }
 
-    const existingUser = await User.findOne({ email: email });
-    if (existingUser)
-      return res
-        .status(400)
-        .json({ msg: "An account with this email already exists." });
+    if (!username) {
+      username = email;
+    }
 
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ msg: "An account with this email already exists." });
+    }
+
+    // Hash password
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
+    // Create new user
     const newUser = new User({
       email,
       password: passwordHash,
       username,
     });
+
+    // Save new user to database
     const savedUser = await newUser.save();
-    res.json(savedUser);
+
+    // Generate JWT and send response
+    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
+    res.json({
+      token,
+      user: {
+        id: savedUser._id,
+        username: savedUser.username,
+        email: savedUser.email,
+      },
+    });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;

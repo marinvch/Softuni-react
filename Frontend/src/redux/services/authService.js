@@ -7,9 +7,10 @@ const url = isProduction ? 'https://marin-forum.herokuapp.com' : 'http://localho
 export const authUser = (email, password) => {
   return axios.post(`${url}/login`, { email, password });
 };
-
-export const registerUser = () => {
-  return axios.post(`${url}/auth/register`);
+export const registerUser = async (userData) => {
+  console.log(userData)
+  const response = await axios.post(`${url}/users/register`, userData);
+  return response;
 };
 
 export const authLogout = () => {

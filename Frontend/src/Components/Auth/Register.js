@@ -7,7 +7,8 @@ import { Box, TextField, Button, Stack, Typography } from "@mui/material/";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import "./Styles/Register.css";
 
-import { registerSuccess } from "../../redux/features/authSlice";
+import { registerSuccess, userLoading, loginUser } from "../../redux/features/authSlice";
+import { registerUser } from "../../redux/services/authService"
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -33,25 +34,31 @@ const Register = () => {
   const handleLogin = () => {
     history.push("/auth");
   };
-
+  
   const handleSignup = (e) => {
-    // Dispatch the registerSuccess action with the user data
     e.preventDefault();
-    const { email, username, password, repeatPassword } = userData
+    const { email, username, password, repeatPassword } = userData;
     if (!email || !username || !password || !repeatPassword) {
       alert("All fields are required");
       return;
     }
-    console.log(userData)
-    dispatch(registerSuccess(userData));
-
-    // Redirect to the dashboard page (or wherever you want to redirect)
-    history.push("/dashboard");
+    dispatch(userLoading());
+    registerUser(userData)
+      .then(response => {
+        dispatch(registerSuccess(response.data));
+        dispatch(loginUser(response.data));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        localStorage.setItem("authenticated", true);
+        history.push("/profile");
+      })
+      .catch(error => console.log(error));
   };
 
 
+
+
   return (
-    <Box className="login-wrapper">
+    <Box className="login-wrapper" stye={{ background: "white" }}>
       <Typography variant="h5" component="h2" style={{ marginTop: "15px" }}>
         Register your Account
       </Typography>
