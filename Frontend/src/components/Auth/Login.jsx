@@ -26,7 +26,7 @@ const Login = () => {
           localStorage.setItem('auth', res.data.token)
           console.log(res.data)
           dispatch(loginSuccess(res.data))
-        }).then(history.push('/dashbord'));
+        }).then(history.push('/'));
       }
     } catch (err) {
       console.log(err)

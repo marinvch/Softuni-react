@@ -1,3 +1,6 @@
+
+
+
 import React, { useState, useEffect } from "react";
 import {
   AppBar,
@@ -13,7 +16,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutSuccess } from "../../redux/features/authSlice";
 
-const Navbar = () => {
+const Header = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch()
   const history = useHistory();
@@ -23,7 +26,7 @@ const Navbar = () => {
   };
   const logoutHandler = () => {
     dispatch(logoutSuccess());
-    localStorage.removeItem('auth') 
+    localStorage.removeItem('auth')
 
   };
 
@@ -53,7 +56,7 @@ const Navbar = () => {
               >
                 MERN FORUM
               </Typography>
-           
+
               {auth?.isAuthenticated || localStorage.getItem('auth') ? (
                 <>
                   <Avatar
@@ -90,4 +93,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Header;

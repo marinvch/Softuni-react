@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Styles/Header.css";
 
-const Header = () => {
+const Navigation = () => {
   return (
     <header className="header">
       <section className="logo">
@@ -25,4 +25,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navigation;
